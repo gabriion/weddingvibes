@@ -48,5 +48,7 @@ $email_message .= "No of Guests: ".clean_string($comments)."\n";
 $headers = 'From: '.$email_from."\r\n".
 'Reply-To: '.$email_from."\r\n" .
 'X-Mailer: PHP/' . phpversion();
-@mail($email_to, $email_subject, $email_message, $headers);}
+@mail($email_to, $email_subject, $email_message, $headers);
+header('Location: contact-form-thank-you.html');
+}
 ?>
