@@ -35,7 +35,7 @@ if(empty($errors))//1==1)
 	$headers .= "Reply-To: $email_address";
 	$headers .= 'X-Mailer: PHP/' . phpversion();
 	
-	mail('ion.gabriel6@gmail.com',$email_subject,$email_body,$headers);
+	mail($to,$email_subject,$email_body,$headers,"-f noreply@mydomain.com");
 	//redirect to the 'thank you' page
 
 	header('Location: contact-form-thank-you.html');
