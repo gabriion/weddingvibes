@@ -1,54 +1,83 @@
 <?php
-if(isset($_POST['email'])) {
-// EDIT THE 2 LINES BELOW AS REQUIRED
-$email_to = "ion.gabriel6@gmail.com";
-$email_subject = "Confirmare nunta";
-function died($error) {
-// your error code can go here
-echo "We are very sorry, but there were error(s) found with the form you submitted. ";
-echo "These errors appear below.<br /><br />";
-echo $error."<br /><br />";
-echo "Please go back and fix these errors.<br /><br />";
-die();
+ $url = 'https://api.sendgrid.com/';
+ $user = 'azure_f7b609bb14895fa8acf4c715b39b6de7@azure.com';
+ $pass = 'Singiner1';
+
+ $myemail = 'gabriel_gion@yahoo.com';//<-----Put Your email address here.
+
+$name = $_POST['name']; 
+$email_address = $_POST['email']; 
+$message = $_POST['message']; 
+$guest = $_POST['guest'];
+
+if(empty($_POST['name'])  || 
+   empty($_POST['email']) || 
+   empty($_POST['guest']) ||
+   empty($_POST['message']))
+{
+    $errors .= "\n Error: all fields are required , $name, $email_address, $message, $guest";
 }
-// validation expected data exists
-if(!isset($_POST['name']) ||
-!isset($_POST['email']) ||
-!isset($_POST['message']) ||
-!isset($_POST['guest'])) {
-died('We are sorry, but there appears to be a problem with the form you submitted.');}
-$first_name = $_POST['name']; // required
-$email_from = $_POST['email']; // required
-$telephone = $_POST['message']; // not required
-$comments = $_POST['guest']; // required
-$error_message = "";
-$email_exp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/';
-if(!preg_match($email_exp,$email_from)) {
-$error_message .= 'The Email Address you entered does not appear to be valid.<br />';
+
+
+
+if (!preg_match(
+"/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i", 
+$email_address))
+{
+    $errors .= "\n Error: Invalid email address";
 }
-$string_exp = "/^[A-Za-z .'-]+$/";
-if(!preg_match($string_exp,$first_name)) {
-$error_message .= 'The First Name you entered does not appear to be valid.<br />';
-}
-if(strlen($comments) < 10) {
-$error_message .= 'The Comments you entered do not appear to be valid.<br />';
-}
-if(strlen($error_message) > 0) {
-died($error_message);
-}
-$email_message = "Form details below.\n\n";
-function clean_string($string) {
-$bad = array("content-type","bcc:","to:","cc:","href");
-return str_replace($bad,"",$string);}
-$email_message .= "First Name: ".clean_string($first_name)."\n";
-$email_message .= "Email: ".clean_string($email_from)."\n";
-$email_message .= "Message: ".clean_string($telephone)."\n";
-$email_message .= "No of Guests: ".clean_string($comments)."\n";
-// create email headers
-$headers = 'From: '.$email_from."\r\n".
-'Reply-To: '.$email_from."\r\n" .
-'X-Mailer: PHP/' . phpversion();
-@mail($email_to, $email_subject, $email_message, $headers);
-header('Location: contact-form-thank-you.html');
+
+if(empty($errors))//1==1)
+{
+	
+	$email_body = "You have received a new message. ".
+	"Here are the details:\n Name: $name \n Email: $email_address \n Message \n $message, attending with $guest guests"; 
+ $params = array(
+      'api_user' => $user,
+      'api_key' => $pass,
+      'to' => $myemail,
+      'subject' => 'Wedding confirmation',
+      'html' => '#####',
+      'text' => $email_body,
+      'from' => $email_address,
+   );
+
+ $request = $url.'api/mail.send.json';
+
+ // Generate curl request
+ $session = curl_init($request);
+
+ // Tell curl to use HTTP POST
+ curl_setopt ($session, CURLOPT_POST, true);
+
+ // Tell curl that this is the body of the POST
+ curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
+
+ // Tell curl not to return headers, but do return the response
+ curl_setopt($session, CURLOPT_HEADER, false);
+ curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+
+ // obtain response
+ $response = curl_exec($session);
+ curl_close($session);
+
+ // print everything out
+ print_r($response);
+ header('Location: contact-form-thank-you.html');
 }
 ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+<head>
+	<title>Contact form handler</title>
+</head>
+
+<body>
+<!-- This page is displayed only if there is some error -->
+<?php
+echo nl2br($errors);
+?>
+
+
+</body>
+</html>
