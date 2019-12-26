@@ -24,7 +24,7 @@ $email_address))
     $errors .= "\n Error: Invalid email address";
 }
 
-if(1==1)
+if(empty($errors))//1==1)
 {
 	$to = $myemail; 
 	$email_subject = "Contact form submission: $name";
@@ -34,7 +34,7 @@ if(1==1)
 	$headers = "From: $myemail\n"; 
 	$headers .= "Reply-To: $email_address";
 	
-	mail($to,$email_subject,$email_body,$headers);
+	mail('ion.gabriel6@gmail.com',$email_subject,$email_body,$headers);
 	//redirect to the 'thank you' page
 	header('Location: contact-form-thank-you.html');
 } 
