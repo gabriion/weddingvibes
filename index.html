@@ -442,16 +442,18 @@
           </div>
         </div>
 		
-		<script language="JavaScript">
+	<!--	<script language="JavaScript">
 var frmvalidator  = new Validator("contactform");
 frmvalidator.addValidation("name","req","Please provide your name");
 frmvalidator.addValidation("email","req","Please provide your email");
 frmvalidator.addValidation("email","email","Please enter a valid email address");
-</script>
+</script>-->
+
+
 
         <div class="row justify-content-center">
         	<div class="col-md-7">
-        		<form action="contact-form-handler_og.php" method="post" enctype="text/plain" class="rsvp-form ftco-animate" name="contactform"=>
+        		<form action="#" method="post" enctype="text/plain" class="rsvp-form ftco-animate" name="contactform"=>
 	    				<div class="">
 		    				<div class="form-group">
 		    					<input type="text" class="form-control" placeholder="Nume" name="name">
@@ -482,9 +484,28 @@ frmvalidator.addValidation("email","email","Please enter a valid email address")
 		              <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Mesaj" name="message"></textarea>
 		            </div>
 		            <div class="form-group">
-		              <input type="submit" value="O sa fiu acolo" class="btn btn-primary py-3 px-4">
+		              <input type="submit" value="O sa fiu acolo" class="btn btn-primary py-3 px-4" name="submit">
 		            </div>
 	    				</div>
+						
+<?php
+
+if($_POST["submit"]) {
+    $recipient="ion.gabriel6@gmail.com";
+    $subject="Confirmare nunta";
+    $sender=$_POST["name"];
+    $senderEmail=$_POST["email"];
+    $message=$_POST["message"];
+
+    $mailBody="Name: $sender\nEmail: $senderEmail\n\n$message";
+
+    mail($recipient, $subject, $mailBody, "From: $sender <$senderEmail>");
+
+    $thankYou="<p>Thank you! Your message has been sent.</p>";
+}
+
+?>
+
 	    			</form>
         	</div>
         </div>
