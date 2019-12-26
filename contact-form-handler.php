@@ -36,7 +36,7 @@ if(empty($errors))//1==1)
       'api_user' => $user,
       'api_key' => $pass,
       'to' => $myemail,
-      'subject' => $subject,
+      'subject' => 'Wedding confirmation',
       'html' => $email_body,
       'text' => $email_body,
       'from' => $email_address,
