@@ -1,18 +1,21 @@
 <?php 
 $errors = '';
 $myemail = 'ion.gabriel6@gmail.com';//<-----Put Your email address here.
-if(empty($_POST['name'])  || 
-   empty($_POST['email']) || 
-   empty($_POST['guest']) ||
-   empty($_POST['message']))
-{
-    $errors .= "\n Error: all fields are required";
-}
 
 $name = $_POST['name']; 
 $email_address = $_POST['email']; 
 $message = $_POST['message']; 
 $guest = $_POST['guest'];
+
+if(empty($_POST['name'])  || 
+   empty($_POST['email']) || 
+   empty($_POST['guest']) ||
+   empty($_POST['message']))
+{
+    $errors .= "\n Error: all fields are required , $name, $email_address, $message, $guest";
+}
+
+
 
 if (!preg_match(
 "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i", 
@@ -21,7 +24,7 @@ $email_address))
     $errors .= "\n Error: Invalid email address";
 }
 
-if( empty($errors))
+if(1=1)
 {
 	$to = $myemail; 
 	$email_subject = "Contact form submission: $name";
