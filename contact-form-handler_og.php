@@ -33,9 +33,11 @@ if(empty($errors))//1==1)
 	
 	$headers = "From: $myemail\n"; 
 	$headers .= "Reply-To: $email_address";
+	$headers .= 'X-Mailer: PHP/' . phpversion();
 	
 	mail('ion.gabriel6@gmail.com',$email_subject,$email_body,$headers);
 	//redirect to the 'thank you' page
+
 	header('Location: contact-form-thank-you.html');
 } 
 ?>
