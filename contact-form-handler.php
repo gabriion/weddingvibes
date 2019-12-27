@@ -30,13 +30,13 @@ $email_address))
 if(empty($errors))//1==1)
 {
 	
-	$email_body = "You have received a new message. ". "Here are the details:\n Name: $name \n Email: $email_address \n Message \n $message, attending with $guest guests"; 
+	$email_body = "A mai confirmat cineva. ---------- \n Nume: $name \n attending with $guest guests, ----- Email: $email_address ---------\n Mesaj: \n $message, "; 
 	$subject= "Wedding confirmation from $name";
  $params = array(
       'api_user' => $user,
       'api_key' => $pass,
       'to' => $myemail,
-      'subject' => 'Wedding confirmation',
+      'subject' => $subject,
       'html' => $email_body,
       'text' => $email_body,
       'from' => $email_address,
