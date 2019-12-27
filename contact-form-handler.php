@@ -1,7 +1,7 @@
 <?php
  $url = 'https://api.sendgrid.com/';
- $user = 'azure_f7b609bb14895fa8acf4c715b39b6de7@azure.com';
- $pass = 'Singiner1';
+ $user = '#';
+ $pass = '#';
 
  $myemail = 'gabriel_gion@yahoo.com';//<-----Put Your email address here.
 
