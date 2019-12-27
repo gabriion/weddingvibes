@@ -39,7 +39,7 @@ if(empty($errors))//1==1)
       'subject' => $subject,
       'html' => $email_body,
       'text' => $email_body,
-      //'from' => $myemail,
+      'from' => $myemail,
    );
 
  $request = $url.'api/mail.send.json';
