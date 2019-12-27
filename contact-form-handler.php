@@ -1,9 +1,9 @@
 <?php
  $url = 'https://api.sendgrid.com/';
- $user = '#';
- $pass = '#';
+ $user = getenv("sendgrid_username");
+ $pass = getenv("sendgrid_pass");
 
- $myemail = 'gabriel_gion@yahoo.com';//<-----Put Your email address here.
+ $myemail = getenv("myemail");//<-----Put Your email address here.
 
 $name = $_POST['name']; 
 $email_address = $_POST['email']; 
