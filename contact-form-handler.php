@@ -30,7 +30,7 @@ $email_address))
 if(empty($errors))//1==1)
 {
 	
-	$email_body = "A mai confirmat cineva. ---------- \n Nume: $name \n attending with $guest guests, ----- Email: $email_address ---------\n Mesaj: \n $message, "; 
+	$email_body = "A mai confirmat cineva. ---------- \n Nume: $name \n attending with $guest guests, ----- Email: $email_address ---------\n Mesaj: \n $message"; 
 	$subject= "Wedding confirmation from $name";
  $params = array(
       'api_user' => $user,
@@ -39,7 +39,7 @@ if(empty($errors))//1==1)
       'subject' => $subject,
       'html' => $email_body,
       'text' => $email_body,
-      'from' => $email_address,
+      'from' => $myemail,
    );
 
  $request = $url.'api/mail.send.json';
