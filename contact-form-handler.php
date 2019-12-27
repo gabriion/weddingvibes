@@ -4,6 +4,7 @@
  $pass = getenv("sendgrid_pass");
 
  $myemail = getenv("myemail");//<-----Put Your email address here.
+ $fromemail =getenv("domainemail");
 
 $name = $_POST['name']; 
 $email_address = $_POST['email']; 
@@ -39,7 +40,7 @@ if(empty($errors))//1==1)
       'subject' => $subject,
       'html' => $email_body,
       'text' => $email_body,
-      'from' => $myemail,
+      'from' => $fromemail,
    );
 
  $request = $url.'api/mail.send.json';
